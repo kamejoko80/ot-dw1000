@@ -14,16 +14,11 @@
 #Export environment variable
 source setenv.sh
 
-if [ "$#" -ne  "0" -a "$1" == "INITIAL" ]; then
-    cd $DW_OT_ROOT/..
-    ./setup.sh $1
-elif [ "$#" -ne  "0" -a "$1" == "UPDATE" ]; then
-    cd $DW_OT_ROOT/..
-    ./setup.sh $1
-fi
-
+if [ "$#" -ne  "0" -a "$1" == "--build" ]; then
+echo "==========Build the firmware========="
 #Build command for application
 $OT_ROOT/scripts/build.sh
+fi
 
 echo "==========Flash the firmware========="
 
@@ -35,5 +30,3 @@ nrfjprog --snr 683103016 -f nrf52 --chiperase --program openthread-master/output
 
 echo "Flashing slave device..."
 nrfjprog --snr 683907792 -f nrf52 --chiperase --program openthread-master/output/nrf52840/bin/ot-cli-ftd.hex
-
-
