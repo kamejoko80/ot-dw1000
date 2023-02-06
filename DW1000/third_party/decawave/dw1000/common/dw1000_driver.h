@@ -60,9 +60,6 @@ extern "C" {
 #define SHORT_ADDRESS_SIZE    2    /* Size of Short Mac Address */
 #define EXTENDED_ADDRESS_SIZE 8    /* Size of Extended Mac Address */
 
-/* dw_status is used for printing debug logs */
-uint8_t *dw_status;
-
 /**
  * @brief Initialize dw1000 Radio
  *

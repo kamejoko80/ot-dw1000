@@ -13,8 +13,9 @@ DIR=$(pwd)
 OT_COMMIT_ID=915261b36b256234ef6b40f6cbad69f036851385
 
 PATCH_FILE=ot-dw1000.patch
-TOOLCHAINS_DIR=gcc-arm-none-eabi-7-2017-q4-major
-TOOLCHAINS_FILE=gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2
+TOOLCHAINS_DIR=gcc-arm-none-eabi-10.3-2021.10
+TOOLCHAINS_FILE=gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+TOOLCHAINS_URL=https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10
 
 echo ""
 echo "<SCRIPT_LOG> Current directory $DIR"
@@ -24,10 +25,13 @@ if [ "$#" -ne  "0" -a "$1" == "INITIAL" ]; then
     if [ -d $DIR/toolchains/$TOOLCHAINS_DIR ]; then
        echo "<SCRIPT_LOG> $TOOLCHAINS_DIR already exists..."
        echo "<SCRIPT_LOG> Extract skipped as directory already exists."
+       export PATH=$PATH:$DIR/toolchains/$TOOLCHAINS_DIR/bin
     else
        cd toolchains
        echo "<SCRIPT_LOG> Extracting $TOOLCHAINS_FILE ..."
+       wget $TOOLCHAINS_URL/$TOOLCHAINS_FILE
        tar -xvf $TOOLCHAINS_FILE
+       export PATH=$PATH:$DIR/toolchains/$TOOLCHAINS_DIR/bin
        cd ../
     fi
 else

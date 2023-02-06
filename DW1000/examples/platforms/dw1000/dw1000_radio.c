@@ -117,7 +117,7 @@ bool  transmitDone=1;
 
 static otRadioState sState = OT_RADIO_STATE_DISABLED;
 static bool     sIsReceiverEnabled = false;
-uint8_t         *dw_status;
+extern uint8_t *dw_status;
 
 void enableReceiver(void)
 {

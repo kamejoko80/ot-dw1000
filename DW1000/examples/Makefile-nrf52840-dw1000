@@ -91,6 +91,7 @@ CPPFLAGS                       += \
     $(COMMONCFLAGS)               \
     $(target_CPPFLAGS)            \
     -Wno-implicit-fallthrough     \
+    -Wno-class-memaccess          \
     $(NULL)
 
 CFLAGS                         += \

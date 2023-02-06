@@ -27,6 +27,9 @@
 /* Enable LED debugging */
 #define LED_DEBUG_ENABLE
 
+/* dw_status is used for printing debug logs */
+uint8_t *dw_status;
+
 /* promiscuous mode is disabled by default */
 static bool m_promiscuous = false;
 

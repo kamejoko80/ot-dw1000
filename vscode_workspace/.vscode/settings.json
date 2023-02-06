@@ -1,0 +1,18 @@
+{
+    // Platform selection
+    "DEVICE": "nrf52",
+    "SVD_FILE": "../SVD/Nordic/nrf52840.svd",
+    // Openthread source
+    "OPENTHREAD_SRC_DIR": "../openthread-master",
+    "TOOLCHAINS_DIR": "../toolchains",
+    // Debugging interface
+    "GDB_SEVER_PATH": "/opt/SEGGER/JLink_V780c/JLinkGDBServerCLExe",
+
+    "editor.fontVariations": false,
+    "files.exclude": {
+        "": true
+    },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+}
