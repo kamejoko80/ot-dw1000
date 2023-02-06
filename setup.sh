@@ -14,7 +14,7 @@ OT_COMMIT_ID=915261b36b256234ef6b40f6cbad69f036851385
 
 PATCH_FILE_00=ot-dw1000.patch
 PATCH_FILE_01=ot-dw1000-01.patch
-PATCH_FILE_02=ot-dw1000-01.patch
+PATCH_FILE_02=ot-dw1000-02.patch
 TOOLCHAINS_DIR=gcc-arm-none-eabi-10.3-2021.10
 TOOLCHAINS_FILE=gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 TOOLCHAINS_URL=https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10
@@ -30,7 +30,7 @@ if [ "$#" -ne  "0" -a "$1" == "INITIAL" ]; then
     else
        cd toolchains
        echo "<SCRIPT_LOG> Extracting $TOOLCHAINS_FILE ..."
-       wget $TOOLCHAINS_URL/$TOOLCHAINS_FILE
+       #wget $TOOLCHAINS_URL/$TOOLCHAINS_FILE
        tar -xvf $TOOLCHAINS_FILE
        cd ../
     fi
