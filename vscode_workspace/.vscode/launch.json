@@ -22,7 +22,10 @@
             //"runToEntryPoint": "__start",
             "runToEntryPoint": "main",
             "showDevDebugOutput": "raw",
-            "preLaunchTask": "",
+            "setupCommands": [
+                {"text": "-enable-pretty-printing"},
+                {"text": "set output-radix 16" }
+            ]
         }
     ]
 }
