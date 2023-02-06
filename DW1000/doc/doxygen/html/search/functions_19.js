@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['ya_5fgetopt',['ya_getopt',['../ya__getopt_8c.html#ab304e364e46240633469c966837cbda7',1,'ya_getopt(int argc, char *const argv[], const char *optstring):&#160;ya_getopt.c'],['../ya__getopt_8h.html#ab304e364e46240633469c966837cbda7',1,'ya_getopt(int argc, char *const argv[], const char *optstring):&#160;ya_getopt.c']]],
-  ['ya_5fgetopt_5flong',['ya_getopt_long',['../ya__getopt_8c.html#ab4e4dae10840a9f4b38da642ded3bf54',1,'ya_getopt_long(int argc, char *const argv[], const char *optstring, const struct option *longopts, int *longindex):&#160;ya_getopt.c'],['../ya__getopt_8h.html#ab4e4dae10840a9f4b38da642ded3bf54',1,'ya_getopt_long(int argc, char *const argv[], const char *optstring, const struct option *longopts, int *longindex):&#160;ya_getopt.c']]],
-  ['ya_5fgetopt_5flong_5fonly',['ya_getopt_long_only',['../ya__getopt_8c.html#a7175a5a8b9e3a19c4d2a7e9af3dc9785',1,'ya_getopt_long_only(int argc, char *const argv[], const char *optstring, const struct option *longopts, int *longindex):&#160;ya_getopt.c'],['../ya__getopt_8h.html#a7175a5a8b9e3a19c4d2a7e9af3dc9785',1,'ya_getopt_long_only(int argc, char *const argv[], const char *optstring, const struct option *longopts, int *longindex):&#160;ya_getopt.c']]]
-];

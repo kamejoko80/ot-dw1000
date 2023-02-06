@@ -90,11 +90,14 @@ COMMONCFLAGS                   := \
 CPPFLAGS                       += \
     $(COMMONCFLAGS)               \
     $(target_CPPFLAGS)            \
+    -Wno-implicit-fallthrough     \
     $(NULL)
 
 CFLAGS                         += \
     $(COMMONCFLAGS)               \
     $(target_CFLAGS)              \
+    -Wno-expansion-to-defined     \
+    -Wno-implicit-function-declaration \
     $(NULL)
 
 CXXFLAGS                       += \

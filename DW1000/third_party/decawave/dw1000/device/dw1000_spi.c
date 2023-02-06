@@ -47,10 +47,10 @@ int spi_init(nrf_drv_spi_frequency_t frequency)
         /*SPI initialization*/
     nrf_drv_spi_config_t spi_config = NRF_DRV_SPI_DEFAULT_CONFIG; //default mode 0, frequency 4MHz
     spi_config.frequency = frequency;
-    spi_config.ss_pin   = SPI_SS_PIN;
-    spi_config.miso_pin = SPI_MISO_PIN;
-    spi_config.mosi_pin = SPI_MOSI_PIN;
-    spi_config.sck_pin  = SPI_SCK_PIN;
+    spi_config.ss_pin   = SPI_SS_PIN;   // P0.29, IRQ P0.30
+    spi_config.miso_pin = SPI_MISO_PIN; // P0.28
+    spi_config.mosi_pin = SPI_MOSI_PIN; // P0.4
+    spi_config.sck_pin  = SPI_SCK_PIN;  // P0.3
 
    ret =  nrf_drv_spi_init(&spi, &spi_config,0,NULL);
 

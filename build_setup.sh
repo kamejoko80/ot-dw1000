@@ -12,7 +12,7 @@
 #******************************************************************#
 
 #Export environment variable
-source ./setenv.sh
+source setenv.sh
 
 if [ "$#" -ne  "0" -a "$1" == "INITIAL" ]; then
     cd $DW_OT_ROOT/..

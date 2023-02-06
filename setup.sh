@@ -12,75 +12,24 @@
 DIR=$(pwd)
 OT_COMMIT_ID=915261b36b256234ef6b40f6cbad69f036851385
 
-CLI_TOOL_URL=https://www.nordicsemi.com/eng/nordic/download_resource/58852/21/81185512/94917
-CLI_TOOL_FILE=nRF5x-Command-Line-Tools_9_3_1_Linux-x86_64.tar
-
 PATCH_FILE=ot-dw1000.patch
-
-WPAN_URL=https://github.com/openthread/wpantund/archive/master.zip
-WPAN_FILE=wpantund-master.zip
-WPAN_DIR=wpantund-master
-
+TOOLCHAINS_DIR=gcc-arm-none-eabi-7-2017-q4-major
+TOOLCHAINS_FILE=gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2
 
 echo ""
 echo "<SCRIPT_LOG> Current directory $DIR"
 
 if [ "$#" -ne  "0" -a "$1" == "INITIAL" ]; then
-    echo "<SCRIPT_LOG> Setting up the dependencies for project..."
-    #Install dependent librarires
-    echo "<SCRIPT_LOG> Installing dependent librarires..."
-    sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0
-
-    #Install GCC ARM Embedded tool chain
-    echo "<SCRIPT_LOG> Installing GCC ARM Embedded tool chain..."
-    sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa
-    sudo apt-get update
-    sudo apt-get install gcc-arm-embedded
-
-    #Install wpantund
-    echo "<SCRIPT_LOG> Installing wpantund..."
-    sudo apt-get install dbus libreadline
-    sudo apt-get install gcc g++ libdbus-1-dev libboost-dev libreadline-dev
-    sudo apt-get install libtool autoconf autoconf-archive
-
-    mkdir tools
-    echo "<SCRIPT_LOG> Downloading package for wpantund..."
-    #Download the package if not available
-    if [ -f $DIR/tools/$WPAN_FILE ]; then
-       echo "<SCRIPT_LOG> $WPAN_FILE already exists..."
-    else
-       cd tools
-       echo "<SCRIPT_LOG> Downloading $WPAN_FILE ..."
-       wget -O $WPAN_FILE $WPAN_URL
-       cd ..
-    fi
-
     #Extract the file if not done
-    if [ -d $DIR/tools/$WPAN_DIR ]; then
-       echo "<SCRIPT_LOG> $WPAN_DIR already exists..."
+    if [ -d $DIR/toolchains/$TOOLCHAINS_DIR ]; then
+       echo "<SCRIPT_LOG> $TOOLCHAINS_DIR already exists..."
        echo "<SCRIPT_LOG> Extract skipped as directory already exists."
     else
-       cd tools
-       echo "<SCRIPT_LOG> Extracting $WPAN_FILE ..."
-       unzip $WPAN_FILE
-       cd $WPAN_DIR
-       ./bootstrap.sh
-       ./configure --sysconfdir=/etc
-       make
-       sudo make install
-       cd ../..
+       cd toolchains
+       echo "<SCRIPT_LOG> Extracting $TOOLCHAINS_FILE ..."
+       tar -xvf $TOOLCHAINS_FILE
+       cd ../
     fi
-
-    #Installing Nordic Command Line tools, download the package
-    if [ -f $DIR/tools/$CLI_TOOL_FILE ]; then
-        echo "<SCRIPT_LOG> $CLI_TOOL_FILE already exists..."
-    else
-        cd tools
-        echo "<SCRIPT_LOG> Downloading $CLI_TOOL_FILE ..."
-        wget -O $CLI_TOOL_FILE $CLI_TOOL_URL
-        cd ..
-    fi
-
 else
     echo "<SCRIPT_LOG> Setting up the dependencies for project not required..."
 fi
@@ -104,21 +53,24 @@ if [ "$1" == "INITIAL" -o "$1" == "UPDATE" ]; then
     chmod a+x third_party/nlbuild-autotools/repo/autoconf/ltmain.sh
     cd -
 
-    #Installing Nordic Command Line tools
-    #Extract the file if not preset for Nordic Command line tools
-    if [ -d "$OT_ROOT" ]; then
-        if [ -d "$OT_ROOT/../nrfjprog" -a -d "$OT_ROOT/mergehex" ]; then
-            echo "<SCRIPT_LOG> Extract skipped as directory already exists..."
-        else
-            echo "<SCRIPT_LOG> Extracting $CLI_TOOL_FILE ..."
-            tar -xvf $OT_ROOT/../tools/$CLI_TOOL_FILE -C $OT_ROOT
-        fi
-    else
-        echo "<SCRIPT_LOG> Extracting $CLI_TOOL_FILE ..."
-        tar -xvf $OT_ROOT/../tools/$CLI_TOOL_FILE -C $OT_ROOT
-    fi
-
     #Create symlinks
+    echo "<SCRIPT_LOG> Removing the previous symbolic links if any..."
+    rm -rf $OT_ROOT/examples/platforms/dw1000
+    rm -rf $OT_ROOT/examples/Makefile-nrf52840-dw1000
+    rm -rf $OT_ROOT/scripts
+    rm -rf $OT_ROOT/third_party/decawave
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/drivers/nrf_delay.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/drivers/nrf_drv_spi.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/drivers/nrf_error.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/drivers/sdk_common.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/drivers/sdk_config.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/drivers/sdk_errors.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/drivers/nrf_drv_spi.c
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nordic_common.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_gpiote.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spi.h
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spim.h    
+    
     echo "<SCRIPT_LOG> Creating symbolic links..."
     sudo ln -s $DW_OT_ROOT/examples/platforms/dw1000 $OT_ROOT/examples/platforms/dw1000
     sudo ln -s $DW_OT_ROOT/examples/Makefile-nrf52840-dw1000 $OT_ROOT/examples/Makefile-nrf52840-dw1000
@@ -135,8 +87,6 @@ if [ "$1" == "INITIAL" -o "$1" == "UPDATE" ]; then
     sudo ln -s $DW_OT_ROOT/third_party/NordicSemiconductor/hal/nrf_gpiote.h $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_gpiote.h
     sudo ln -s $DW_OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spi.h $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spi.h
     sudo ln -s $DW_OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spim.h $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spim.h
-    sudo ln -s $DW_OT_ROOT/tools/pyterm $OT_ROOT/tools/pyterm
-    sudo ln -s $DW_OT_ROOT/doc/doxygen $OT_ROOT/doc/doxygen
     sync
 
     #Apply a patch for the makefile changes.

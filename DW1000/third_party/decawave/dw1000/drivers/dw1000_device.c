@@ -48,6 +48,8 @@ uint8 header_read[150]  =   {0};
 #define FORCE_OTP_OFF  12
 #define FORCE_TX_PLL   13
 
+#define DEBUGx 1
+
 // #define DWT_API_ERROR_CHECK     // define so API checks config input parameters
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -2517,7 +2519,6 @@ uint8 dwt_checkIRQ(void)
  *
  * no return value
  */
-#define DEBUGx 0
 
 uint32 last_status[10];
 int status_idx = 0;
