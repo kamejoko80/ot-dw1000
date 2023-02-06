@@ -25,13 +25,11 @@ if [ "$#" -ne  "0" -a "$1" == "INITIAL" ]; then
     if [ -d $DIR/toolchains/$TOOLCHAINS_DIR ]; then
        echo "<SCRIPT_LOG> $TOOLCHAINS_DIR already exists..."
        echo "<SCRIPT_LOG> Extract skipped as directory already exists."
-       export PATH=$PATH:$DIR/toolchains/$TOOLCHAINS_DIR/bin
     else
        cd toolchains
        echo "<SCRIPT_LOG> Extracting $TOOLCHAINS_FILE ..."
        wget $TOOLCHAINS_URL/$TOOLCHAINS_FILE
        tar -xvf $TOOLCHAINS_FILE
-       export PATH=$PATH:$DIR/toolchains/$TOOLCHAINS_DIR/bin
        cd ../
     fi
 else

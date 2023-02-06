@@ -18,6 +18,16 @@ BASEDIR=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
 #Export the Environment variables.
 OT_ROOT=$BASEDIR/openthread-master
 DW_OT_ROOT=$BASEDIR/DW1000
+TOOLCHAINS_DIR=gcc-arm-none-eabi-10.3-2021.10
+
+#export toolchains PATH
+if [[ $PATH == *$TOOLCHAINS_DIR* ]]; then
+    echo "Toolchains detected"
+    echo $TOOLCHAINS_DIR
+else
+    echo "export toolchains install dir..."
+    export PATH=$PATH:$BASEDIR/toolchains/$TOOLCHAINS_DIR/bin
+fi
 
 export OT_ROOT
 export DW_OT_ROOT
