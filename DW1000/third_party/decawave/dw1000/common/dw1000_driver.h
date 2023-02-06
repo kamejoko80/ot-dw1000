@@ -50,6 +50,7 @@ extern "C" {
 #include "nrf_spi.h"
 
 #define GPIOTE_PIN 30  /* GPIO Pin-30 is configured for External interrupt */
+#define DWRST_PIN 31   /* GPIO Pin-31 is configured for dw1000 reset pin */ 
 
 /* To configure LEDs on/off on NRF52840 Platform*/
 #define LED1       13   /* GPIO 13 -> LED1 (LED is connected to GPIO Pin)*/

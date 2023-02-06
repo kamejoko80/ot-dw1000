@@ -8,6 +8,9 @@
 		}
 	],
 	"settings": {
-		"cortex-debug.variableUseNaturalFormat": false
+		"cortex-debug.variableUseNaturalFormat": false,
+		"files.associations": {
+			"dw1000_spi.h": "c"
+		}
 	}
 }
