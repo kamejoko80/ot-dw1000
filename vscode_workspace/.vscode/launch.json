@@ -24,7 +24,8 @@
             "showDevDebugOutput": "raw",
             "setupCommands": [
                 {"text": "-enable-pretty-printing"},
-                {"text": "set output-radix 16" }
+                {"text": "set output-radix 16" },
+                {"text": "monitor semihosting enable"}
             ]
         }
     ]

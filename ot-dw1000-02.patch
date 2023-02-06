@@ -1,0 +1,11 @@
+diff -ruN openthread-master-orig/examples/platforms/nrf52840/Makefile.am openthread-master/examples/platforms/nrf52840/Makefile.am
+--- openthread-master-orig/examples/platforms/nrf52840/Makefile.am	2023-02-07 01:19:43.230040599 +0700
++++ openthread-master/examples/platforms/nrf52840/Makefile.am	2023-02-07 01:25:44.330702033 +0700
+@@ -89,6 +89,7 @@
+     @top_builddir@/third_party/NordicSemiconductor/hal/nrf_nvmc.c                \
+     @top_builddir@/third_party/NordicSemiconductor/device/system_nrf52840.c      \
+     @top_builddir@/third_party/NordicSemiconductor/segger_rtt/SEGGER_RTT.c       \
++    @top_builddir@/third_party/NordicSemiconductor/segger_rtt/SEGGER_RTT_printf.c \
+     @top_builddir@/third_party/NordicSemiconductor/segger_rtt/SEGGER_RTT_Conf.h  \
+     @top_builddir@/third_party/NordicSemiconductor/device/gcc_startup_nrf52840.S \
+     $(NULL)

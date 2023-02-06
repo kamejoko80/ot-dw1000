@@ -12,7 +12,9 @@
 DIR=$(pwd)
 OT_COMMIT_ID=915261b36b256234ef6b40f6cbad69f036851385
 
-PATCH_FILE=ot-dw1000.patch
+PATCH_FILE_00=ot-dw1000.patch
+PATCH_FILE_01=ot-dw1000-01.patch
+PATCH_FILE_02=ot-dw1000-01.patch
 TOOLCHAINS_DIR=gcc-arm-none-eabi-10.3-2021.10
 TOOLCHAINS_FILE=gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 TOOLCHAINS_URL=https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10
@@ -71,8 +73,8 @@ if [ "$1" == "INITIAL" -o "$1" == "UPDATE" ]; then
     rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nordic_common.h
     rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_gpiote.h
     rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spi.h
-    rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spim.h    
-    
+    rm -rf $OT_ROOT/third_party/NordicSemiconductor/hal/nrf_spim.h
+
     echo "<SCRIPT_LOG> Creating symbolic links..."
     sudo ln -s $DW_OT_ROOT/examples/platforms/dw1000 $OT_ROOT/examples/platforms/dw1000
     sudo ln -s $DW_OT_ROOT/examples/Makefile-nrf52840-dw1000 $OT_ROOT/examples/Makefile-nrf52840-dw1000
@@ -93,9 +95,11 @@ if [ "$1" == "INITIAL" -o "$1" == "UPDATE" ]; then
 
     #Apply a patch for the makefile changes.
     echo "<SCRIPT_LOG> Applying patch $PATCH_FILE for the common files..."
-    if [ -f $DIR/$PATCH_FILE ]; then
+    if [ -f $DIR/$PATCH_FILE_00 ]; then
         echo "<SCRIPT_LOG> $DIR/$PATCH_FILE file exists"
-        patch -p0 -b < $PATCH_FILE
+        patch -p0 -b < $PATCH_FILE_00
+        patch -p0 -b < $PATCH_FILE_01
+        patch -p0 -b < $PATCH_FILE_02
     else
         echo "<SCRIPT_LOG> $DIR/$PATCH_FILE not found"
     fi

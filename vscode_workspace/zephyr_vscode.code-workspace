@@ -11,6 +11,11 @@
 		"cortex-debug.variableUseNaturalFormat": false,
 		"files.associations": {
 			"dw1000_spi.h": "c"
-		}
+		},
+		"editor.accessibilityPageSize": 12,
+		"editor.codeActionsOnSave": {
+
+		},
+		"editor.fontSize": 12
 	}
 }
