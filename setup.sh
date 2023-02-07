@@ -12,7 +12,8 @@
 DIR=$(pwd)
 OT_COMMIT_ID=915261b36b256234ef6b40f6cbad69f036851385
 
-PATCH_FILE_00=ot-dw1000.patch
+PATH_DIR=patch
+PATCH_FILE_00=ot-dw1000-00.patch
 PATCH_FILE_01=ot-dw1000-01.patch
 PATCH_FILE_02=ot-dw1000-02.patch
 TOOLCHAINS_DIR=gcc-arm-none-eabi-10.3-2021.10
@@ -30,7 +31,7 @@ if [ "$#" -ne  "0" -a "$1" == "INITIAL" ]; then
     else
        cd toolchains
        echo "<SCRIPT_LOG> Extracting $TOOLCHAINS_FILE ..."
-       #wget $TOOLCHAINS_URL/$TOOLCHAINS_FILE
+       wget $TOOLCHAINS_URL/$TOOLCHAINS_FILE
        tar -xvf $TOOLCHAINS_FILE
        cd ../
     fi
@@ -95,11 +96,11 @@ if [ "$1" == "INITIAL" -o "$1" == "UPDATE" ]; then
 
     #Apply a patch for the makefile changes.
     echo "<SCRIPT_LOG> Applying patch $PATCH_FILE for the common files..."
-    if [ -f $DIR/$PATCH_FILE_00 ]; then
+    if [ -f $DIR/$PATH_DIR/$PATCH_FILE_00 ]; then
         echo "<SCRIPT_LOG> $DIR/$PATCH_FILE file exists"
-        patch -p0 -b < $PATCH_FILE_00
-        patch -p0 -b < $PATCH_FILE_01
-        patch -p0 -b < $PATCH_FILE_02
+        patch -p0 -b < $PATH_DIR/$PATCH_FILE_00
+        patch -p0 -b < $PATH_DIR/$PATCH_FILE_01
+        patch -p0 -b < $PATH_DIR/$PATCH_FILE_02
     else
         echo "<SCRIPT_LOG> $DIR/$PATCH_FILE not found"
     fi
