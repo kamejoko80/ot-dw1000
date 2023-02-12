@@ -3,26 +3,29 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+
     "configurations": [
         {
-            "name": "Cortex Debug",
+            "name": "Debug with J-Link",
+            "type": "cortex-debug",
+            "request": "launch",
             "cwd": "${workspaceFolder}",
             "searchDir":  ["${config:OPENTHREAD_SRC_DIR}"],
             "armToolchainPath": "${config:TOOLCHAINS_DIR}/gcc-arm-none-eabi-10.3-2021.10/bin",
             "gdbPath": "${config:TOOLCHAINS_DIR}/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gdb",
             "toolchainPrefix": "arm-none-eabi",
             "executable": "${config:OPENTHREAD_SRC_DIR}/output/nrf52840/bin/ot-cli-ftd",
-            "request": "launch",
-            "type": "cortex-debug",
-            "device": "${config:DEVICE}",
-            "svdFile": "${config:SVD_FILE}",
-            "serverpath": "${config:GDB_SEVER_PATH}",
             "servertype": "jlink",
             "interface": "swd",
-            //"runToEntryPoint": "__start",
+            "device": "${config:DEVICE}",
+            "svdFile": "${config:SVD_FILE}",
+          //"runToEntryPoint": "__start",
+          //"runToMain": true,
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "raw",
-            "setupCommands": [
+            "postRestartCommands": [
+                "monitor halt",
+                "monitor reset",
+                "monitor halt",
                 {"text": "-enable-pretty-printing"},
                 {"text": "set output-radix 16" },
                 {"text": "monitor semihosting enable"}
