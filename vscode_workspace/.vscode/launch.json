@@ -29,7 +29,18 @@
                 {"text": "-enable-pretty-printing"},
                 {"text": "set output-radix 16" },
                 {"text": "monitor semihosting enable"}
-            ]
+            ],
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            }
         }
     ]
 }
