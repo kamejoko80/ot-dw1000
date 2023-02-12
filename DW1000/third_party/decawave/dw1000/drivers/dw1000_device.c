@@ -52,6 +52,12 @@ uint8 header_read[150]  =   {0};
 
 #define DEBUGx 1
 
+// Phuong added
+#define PRINTF(fmt, ...) \
+    do { \
+        SEGGER_RTT_printf(0, "[DEBUG] " fmt "\n", ##__VA_ARGS__); \
+    } while (0)
+
 // #define DWT_API_ERROR_CHECK     // define so API checks config input parameters
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -170,6 +176,10 @@ int dwt_initialise(uint16 config)
     dw1000local.dwt_txcallback = NULL ;
     dw1000local.dwt_rxcallback = NULL ;
 
+    // Phuong added
+    SEGGER_RTT_Init();
+    SEGGER_RTT_printf(0, "RTT Init...\r\n");
+
     // DW1000 HW reset
     // Configure reset pin active low
     nrf_gpio_cfg_output(DWRST_PIN);
@@ -178,6 +188,8 @@ int dwt_initialise(uint16 config)
     nrf_gpio_cfg_input(DWRST_PIN, NRF_GPIO_PIN_NOPULL); 
 
     dw1000local.deviceID =  dwt_readdevid() ;
+
+    PRINTF("deviceID = %X\r\n", dw1000local.deviceID);
 
     dwt_softreset();
 
